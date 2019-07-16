@@ -25,5 +25,47 @@ public class MsgReceiver {
     public void process(String content) {
         logger.info("接收处理队列C当中的消息： " + content);
     }
+//
+//    @RabbitHandler
+//    public void processMessage2(String message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
+//        System.out.println(message);
+//        try {
+//            channel.basicAck(tag,false);            // 确认消息
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+//    @RabbitHandler
+//    public void processMessage22(String message, Channel channel,@Headers Map<String,Object> map) {
+//        System.out.println("手动确认" + message);
+//        try {
+//            int i = 5/0;
+//        } catch (Exception e) {
+//          logger.error("错误" + e);
+//        } finally {
+//            try {
+//               // channel.basicNack((Long)map.get(AmqpHeaders.DELIVERY_TAG),false,true);      //否认消息,一直重新入队列然后一直重新消费
+//                channel.basicReject((Long)map.get(AmqpHeaders.DELIVERY_TAG),false); //拒绝该消息，消息会被丢弃，不会重回队列
+//            } catch (IOException e) {
+//                logger.error("拒绝消息出错" + e);
+//            }
+//        }
+
+//        if (map.get("error")!= null){
+//            System.out.println("错误的消息");
+//            try {
+//                channel.basicNack((Long)map.get(AmqpHeaders.DELIVERY_TAG),false,true);      //否认消息
+//                return;
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        try {
+//            channel.basicAck((Long)map.get(AmqpHeaders.DELIVERY_TAG),false);            //确认消息
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }

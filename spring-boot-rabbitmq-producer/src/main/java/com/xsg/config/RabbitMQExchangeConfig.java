@@ -67,7 +67,8 @@ public class RabbitMQExchangeConfig {
     //必须是prototype类型
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate template = new RabbitTemplate(connectionFactory());
-        template.setMandatory(true);//开启强制委托模式
+        //开启强制委托模式
+        template.setMandatory(true);
         return template;
     }
 

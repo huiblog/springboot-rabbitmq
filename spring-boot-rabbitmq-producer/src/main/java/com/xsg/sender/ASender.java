@@ -39,7 +39,8 @@ public class ASender implements RabbitTemplate.ReturnCallback,RabbitTemplate.Con
 
     public void sendMsg(String content) {
         CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
-        rabbitTemplate.convertAndSend(EXCHANGE_C, "rrr.cc.dd", content, correlationId);
+
+        rabbitTemplate.convertAndSend(EXCHANGE_C, "red.apple.big", content, correlationId);
 
     }
 

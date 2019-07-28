@@ -12,7 +12,7 @@ import static com.xsg.config.RabbitMQExchangeConfig.QUEUE_A;
  * @ClassName: MsgReceiverC_one
  * @Description: TODO
  * @Author: 渣渣辉
- * @Date: 2019/7/10  17:00
+ * @Date: 2019/7/14  17:00
  * @version : V1.0
  */
 

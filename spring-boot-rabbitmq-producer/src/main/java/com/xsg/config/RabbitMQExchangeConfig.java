@@ -126,6 +126,8 @@ public class RabbitMQExchangeConfig {
         return new Queue(QUEUE_C, false); //队列持久
     }
 
+
+
     @Bean
     public Binding bindingC() {
         return BindingBuilder.bind(queueC()).to(topicExchange()).with(TOPIS_A);

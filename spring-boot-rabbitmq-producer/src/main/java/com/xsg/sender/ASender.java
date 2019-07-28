@@ -23,6 +23,19 @@ public class ASender implements RabbitTemplate.ReturnCallback,RabbitTemplate.Con
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    /**
+     * 回调
+     */
+    @Override
+    public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+        logger.info(" 回调id:" + correlationData);
+        if (ack) {
+            logger.info("消息成功消费");
+        } else {
+            logger.info("消息消费失败:" + cause);
+        }
+    }
+
     @Override
     public void returnedMessage(Message message, int replyCode,
                                 String replyText, String exchange, String routingKey) {
@@ -39,23 +52,7 @@ public class ASender implements RabbitTemplate.ReturnCallback,RabbitTemplate.Con
 
     public void sendMsg(String content) {
         CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
-
-        rabbitTemplate.convertAndSend(EXCHANGE_C, "red.apple.big", content, correlationId);
+        rabbitTemplate.convertAndSend(EXCHANGE_C, "aa.apple.big", content, correlationId);
 
     }
-
-    /**
-     * 回调
-     */
-    @Override
-    public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-        logger.info(" 回调id:" + correlationData);
-        if (ack) {
-            logger.info("消息成功消费");
-        } else {
-            logger.info("消息消费失败:" + cause);
-        }
-    }
-
-
 }

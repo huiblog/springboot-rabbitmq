@@ -1,10 +1,15 @@
 package com.xsg.Recever;
 
+import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.support.AmqpHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 import static com.xsg.config.RabbitMQExchangeConfig.QUEUE_C;
 
@@ -21,9 +26,20 @@ public class MsgReceiver {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+//    @RabbitHandler
+//    public void process(String content) {
+//        logger.info("接收处理队列C当中的消息： " + content);
+//    }
+
     @RabbitHandler
-    public void process(String content) {
-        logger.info("接收处理队列C当中的消息： " + content);
+    public void processMessage2(String message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
+        System.out.println(message);
+        try {
+            channel.basicAck(tag, false);            // 确认消息
+            logger.info("消费者成功确认" + message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 //
 //    @RabbitHandler

@@ -3,6 +3,7 @@ package com.xsg.Recever;
 import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
@@ -33,7 +34,6 @@ public class MsgReceiver {
 
     @RabbitHandler
     public void processMessage2(String message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
-        System.out.println(message);
         try {
             channel.basicAck(tag, false);            // 确认消息
             logger.info("消费者成功确认" + message);

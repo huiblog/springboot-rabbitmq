@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.UUID;
 
-import static com.xsg.config.RabbitMQExchangeConfig.EXCHANGE_C;
+import static com.xsg.config.RabbitMQExchangeConfig.*;
 
 /**
  * 用于发送A消息的sender
@@ -52,7 +52,8 @@ public class ASender implements RabbitTemplate.ReturnCallback,RabbitTemplate.Con
 
     public void sendMsg(String content) {
         CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
-        rabbitTemplate.convertAndSend(EXCHANGE_C, "aa.apple.big", content, correlationId);
+        rabbitTemplate.convertAndSend(EXCHANGE_C, NORAL_QUEUE_NAME, content);
 
     }
+
 }
